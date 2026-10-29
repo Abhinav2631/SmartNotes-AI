@@ -1,105 +1,61 @@
 # SmartNotes-AI
 
-An AI-assisted study platform for generating exam-focused notes and learning material, visualizing concepts, managing revision history, and handling credit-based usage.
+SmartNotes-AI is a full-stack study workspace that uses AI to generate study notes and question sets. The interface supports visual explanations, revision history, and PDF export.
 
-This repository contains a React/Vite frontend and a Node.js/Express API. The app also integrates Firebase Authentication, MongoDB, Gemini, and Stripe; each service must be configured with your own credentials before the related features can work.
+## Features in the application
 
-## Features
-
-- Generate structured study notes and question sets with Gemini.
-- Render Markdown and Mermaid diagrams; display charts and visualizations.
-- Sign in, browse note history, and manage usage credits.
-- Support credit purchases with Stripe Checkout and webhook handling.
-- Export learning material to PDF.
-- Responsive React interface using Redux Toolkit and Tailwind CSS.
+- Generate structured notes and question sets with Gemini.
+- Render Markdown and Mermaid diagrams.
+- Display charts and visualizations.
+- Sign in and browse saved note history.
+- Manage usage credits and Stripe Checkout flows.
+- Export study material to PDF.
+- Use a React/Vite client with a Node.js/Express API.
 
 ## Technology stack
 
-- **Frontend:** React, Vite, React Router, Redux Toolkit, Tailwind CSS, Mermaid, Recharts
-- **Backend:** Node.js, Express, Mongoose, JWT/cookie-based authentication
-- **Services:** Firebase Authentication, Gemini API, Stripe
+- **Frontend:** React, Vite, React Router, Redux Toolkit, Tailwind CSS
+- **Backend:** Node.js, Express, Mongoose
+- **Data and authentication:** MongoDB, Firebase Authentication
+- **AI and payments:** Gemini API, Stripe
 
-## Repository layout
+## Run locally
 
-```text
-SmartNotes-AI/
-├── client/       # React/Vite frontend
-├── server/       # Express API
-├── .gitignore
-└── README.md
-```
-
-## Prerequisites
+### Requirements
 
 - Node.js and npm
-- A MongoDB instance
-- A Firebase project with Authentication configured
-- A Google AI Studio/Gemini API key
-- Stripe keys if you intend to use credit purchases and webhooks
+- MongoDB
+- Firebase project with Authentication enabled
+- Gemini API key
+- Stripe credentials only if testing credit purchases
 
-## Local setup
+### Configure the server
 
-### 1. Clone the repository
+1. Open `server/` and run `npm install`.
+2. Copy `server/.env.example` to `server/.env`.
+3. Set `MONGO_URL`, `JWT_SECRET`, `GEMINI_API_KEY`, the Stripe variables if needed, `CLIENT_URL`, and `CLIENT_ORIGIN`.
+4. Start the server with `npm run dev`.
 
-```bash
-git clone https://github.com/Abhinav2631/SmartNotes-AI.git
-cd SmartNotes-AI
-```
+### Configure the client
 
-### 2. Configure the backend
+1. Open `client/` and run `npm install`.
+2. Copy `client/.env.example` to `client/.env`.
+3. Set the `VITE_API_URL` and the required `VITE_FIREBASE_*` values.
+4. Start the client with `npm run dev`.
 
-```bash
-cd server
-npm install
-```
+Do not commit real secrets. Variables prefixed with `VITE_` are bundled into client-side code and must never be treated as private server secrets.
 
-Copy `server/.env.example` to `server/.env` and fill in your own values for `MONGO_URL`, `JWT_SECRET`, `GEMINI_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `CLIENT_URL`, and `CLIENT_ORIGIN`. Do not put real credentials in a committed file.
+## Repository-specific configuration work
 
-Start the API in a terminal from `server/`:
+This copy makes several setup/configuration changes around the existing application:
 
-```bash
-npm run dev
-```
+- Firebase settings are read from `VITE_FIREBASE_*` environment variables rather than hard-coded project IDs.
+- The client API base URL is configurable through `VITE_API_URL`, with a local-development fallback.
+- The server's allowed client origin is configurable with `CLIENT_ORIGIN`.
+- The footer copy is adjusted for this learning/portfolio instance.
 
-### 3. Configure the frontend
-
-In a second terminal, from the repository root:
-
-```bash
-cd client
-npm install
-```
-
-Copy `client/.env.example` to `client/.env`. Configure `VITE_API_URL` and all Firebase values for your own Firebase project. Vite variables are compiled into client-side code, so Firebase web configuration is not a substitute for Firebase security rules.
-
-Start the frontend:
-
-```bash
-npm run dev
-```
-
-### 4. Build and lint the frontend
-
-From `client/`:
-
-```bash
-npm run build
-npm run lint
-```
-
-## Environment files
-
-- `client/.env.example` documents the frontend environment variables.
-- `server/.env.example` documents backend environment variables.
-- Keep real `.env` files private; they are excluded by `.gitignore`.
-
-## Security notes
-
-- Never commit API keys, database URLs, JWT secrets, or Stripe secrets.
-- Use your own Firebase, MongoDB, Gemini, and Stripe configuration.
-- Keep privileged API keys on the server and use provider-side restrictions for browser-visible Firebase configuration.
-- Configure Firebase rules, authentication settings, payment webhooks, and allowed frontend origins before deployment.
+These are configuration and presentation changes; the core application implementation remains substantially based on the upstream project.
 
 ## Attribution and reuse
 
-This repository is an authorized learning/adaptation copy of [SmartNotes-AI by Naresh Chary](https://github.com/NareshChary0430/SmartNotes-AI). The upstream project and its original implementation remain credited to the original creator. This copy has been prepared for personal learning and portfolio practice with permission.
+This repository is an authorised learning/adaptation copy of [SmartNotes-AI by Naresh Chary](https://github.com/NareshChary0430/SmartNotes-AI). The upstream project and its original implementation remain credited to the original creator. This repository should not be described as an independently written application from scratch.

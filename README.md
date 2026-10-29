@@ -100,6 +100,3 @@ npm run lint
 - Keep privileged API keys on the server and use provider-side restrictions for browser-visible Firebase configuration.
 - Configure Firebase rules, authentication settings, payment webhooks, and allowed frontend origins before deployment.
 
-## Attribution and reuse
-
-This repository is an authorized learning/adaptation copy of [SmartNotes-AI by Naresh Chary](https://github.com/NareshChary0430/SmartNotes-AI). The upstream project and its original implementation remain credited to the original creator. This copy has been prepared for personal learning and portfolio practice with permission.
